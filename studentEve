@@ -1,0 +1,65 @@
+#include<iostream>
+#include<cstdlib>
+#include<ctime>
+
+using namespace std;
+
+class Student {
+public:
+	int num, korea, math, english;
+	int lowKorea, lowMath, lowEnglish;
+	double eve;
+	Student() :num(0), korea(0), math(0), english(0) { }
+	void print() {
+		cout << "학번: " << num << " 번 " << ", 국어: " << korea << ", 수학: " << math << ", 영어: " << english << ", 평균: " << eve << endl;
+	}
+	void printLowK() {
+		cout << "학번: " << num << " 번" << ", 국어: " << lowKorea << endl;
+	}
+	void printLowM() {
+		cout << "학번: " << num << " 번" << ", 수학: " << lowMath << endl;
+	}
+	void printLowE() {
+		cout << "학번: " << num << " 번" << ", 영어: " << lowEnglish << endl;
+	}
+};
+
+int main() {
+	Student scoreArray[10];
+	srand(static_cast<unsigned int>(time(NULL))); // 중복없는 랜덤 난수 생성하기 위함
+	
+	cout << "====================== << 각 성적과 평균 >> =======================" << endl;
+	cout << endl;
+
+	for (Student& s : scoreArray) {
+		s.korea = rand() % 100; // 랜덤 국어점수
+		s.math = rand() % 100; // 랜덤 수학점수
+		s.english = rand() % 100; // 랜덤 영어점수
+		s.eve = (s.korea + s.math + s.english) / 3; // 세과목 점수 평균
+	}
+	for (Student& s : scoreArray) {
+		s.print(); // 10명의 성적과 평균
+	}
+
+	cout << endl;
+	cout << "====================== << 최저 점수와 학번 >> =======================" << endl;
+	cout << endl;
+
+	for (Student& s : scoreArray) {
+		if (s.korea < s.math && s.korea < s.english) { // 국어가 제일 낮은 점수인 경우
+			s.lowKorea = s.korea;
+			s.printLowK();
+		}
+		else if (s.math < s.korea && s.math < s.english) { // 수학이 제일 낮은 점수인 경우
+			s.lowMath = s.math;
+			s.printLowM();
+		}
+		else if (s.english < s.korea && s.english < s.math) { // 영어가 제일 낮은 점수인 경우
+			s.lowEnglish = s.english;
+			s.printLowE();
+		}
+	}
+	 
+}
+
+
