@@ -1,0 +1,47 @@
+#include<stdio.h>
+#define MAX_SIZE 5
+
+int main() {
+	int arr[MAX_SIZE];
+	int top = -1; // 스택 초기화
+	int data;
+	char choice;
+
+	while (1) {
+		printf("\nPush(p) or Pop(o): ");
+		scanf_s(" %c", &choice, sizeof(choice));
+
+		if (choice == 'p' || choice == 'P') {
+			if (top != MAX_SIZE - 1) { // 스택이 꽉차지 않는동안
+				printf("Push: ");
+				scanf_s("%d", &data);
+				top++;
+				arr[top] = data; // top 하나 올리고 데이터 push
+			}
+			else {
+				printf("Stack Full!");
+			}
+		}
+		else if (choice == 'o' || choice == 'O') {
+			if (top != -1) { // 스택이 비어있지 않는 동안
+				data = arr[top];
+				printf("Pop: %d", data);
+				top--;
+			}
+			else {
+				printf("Stack Empty!");
+			}
+		}
+		else {
+			printf("Invalid choice!");
+		}
+
+		// 스택 내용 출력
+		printf("\nStack: ");
+		for (int i = 0; i <= top; i++) {
+			printf("%d ", arr[i]);
+		}
+	}
+	
+	return 0;
+}
