@@ -1,47 +1,47 @@
 #include<stdio.h>
 #define MAX_SIZE 5
 
+
 int main() {
 	int arr[MAX_SIZE];
-	int top = -1; // 스택 초기화
-	int data;
-	char choice;
+	int top = -1; // 빈 스택
+	int num ; // 1은 push 할 정수, 2는 pop한 정수를 저장 
+	char select = '\0'; // 푸쉬나 팝 선택
 
 	while (1) {
-		printf("\nPush(p) or Pop(o): ");
-		scanf_s(" %c", &choice, sizeof(choice));
+		printf("\npush(u) 나 pop(o)을 선택하세요: ");
+		scanf_s(" %c", &select);
+		
 
-		if (choice == 'p' || choice == 'P') {
-			if (top != MAX_SIZE - 1) { // 스택이 꽉차지 않는동안
-				printf("Push: ");
-				scanf_s("%d", &data);
-				top++;
-				arr[top] = data; // top 하나 올리고 데이터 push
+		if (select == 'u' || select == 'U') {  //push를 선택한 경우
+			if (top == MAX_SIZE - 1) { // stack 이 꽉 찬 경우
+				printf("stack overflow\n");
 			}
-			else {
-				printf("Stack Full!");
+			else { // stack 이 여유 있는 경우
+				printf("정수 입력: ");
+				scanf_s("%d", &num, sizeof(num)); // push 할 정수 입력 받고
+				top++; // top을 하나 증가
+				arr[top] = num; // 입력받은 정수 top의 인덱스에 넣기
+				printf("%d push\n", num);
 			}
 		}
-		else if (choice == 'o' || choice == 'O') {
-			if (top != -1) { // 스택이 비어있지 않는 동안
-				data = arr[top];
-				printf("Pop: %d", data);
-				top--;
+		else if (select == 'o' || select == 'O') { // pop을 선택한 경우
+			if (top == -1) { // stack 이 빈 경우
+				printf("stack underflow\n");
 			}
-			else {
-				printf("Stack Empty!");
+			else { // stack 에 정수가 있는 경우
+				num = arr[top]; // pop 할 정수를 먼저 저장
+				top--; // 그 후 top을 하나 내린다
+				printf("%d pop\n", num);
 			}
 		}
 		else {
-			printf("Invalid choice!");
+			printf("잘못된 입력입니다 다시 입력해주세요.\n");
 		}
-
-		// 스택 내용 출력
-		printf("\nStack: ");
+		// stack 출력
+		printf("\nstack: ");
 		for (int i = 0; i <= top; i++) {
 			printf("%d ", arr[i]);
 		}
 	}
-	
-	return 0;
 }
