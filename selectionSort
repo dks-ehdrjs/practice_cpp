@@ -1,0 +1,27 @@
+#include<iostream>
+
+using namespace std;
+
+
+
+int main() {
+	int arr[5] = { 7, 5, 1, 4, 3};
+	int buffer,tmpm, mini; 
+	int min = arr[0];
+
+	for (int i = 0; i < 5; i++) {
+		int tmp = arr[i]; // 
+		for (int j = i+1; j < 5; j++) {
+			if (arr[j] < min) {
+				min = arr[j];
+				mini = j;
+			}
+			
+			
+		}
+	}
+
+	for (int i = 0; i < 5; i++) {
+		cout << arr[i] << " ";
+	}
+}
