@@ -1,0 +1,66 @@
+#include<iostream>
+#define MAX_SIZE 5
+
+using namespace std;
+
+int main() {
+	int arr[MAX_SIZE];
+	int data;
+	char mode;
+	int front = 0;
+	int rear = 0; 
+	int count = 0;
+	int capacity = MAX_SIZE;
+
+
+
+	while (1) {
+		cout << "\nenque(e) or deque(d): ";
+		cin >> mode;
+
+		if (mode == 'e') { // 큐 삽입
+
+			if (count == capacity) { // 큐 overflow
+				cout << "Que overflow" << endl;
+				
+			}
+
+			else { // 큐가 비어있는 경우 정수 입력
+				cout << "\n정수입력: ";
+				cin >> data;
+				arr[rear] = data;
+				rear++;
+				count++; // 채워나가다가
+				if (rear == capacity) { // 끝에 만나면 순환
+					rear = 0;
+				}
+			}
+	
+		}
+
+		else if (mode == 'd') { // 큐 제거
+
+			if (count == 0) { // 큐 underflow
+				cout << "Que underflow" << endl;
+			}
+			else {
+				arr[front++];
+				count--;  // 지워나가다가
+				if (front == capacity) { // 끝에 만나면 순환
+					front = 0;
+				}
+			}
+		}
+
+		else { // 잘못입력
+			cout << "다시 입력하세요." << endl;
+		}
+
+		cout << "Qeue: ";
+		for (int i = front; i < count; i++) {
+			cout << arr[i] << ' ';
+		}
+	}
+
+	
+}
