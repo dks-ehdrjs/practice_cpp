@@ -57,7 +57,7 @@ int main() {
 		}
 
 		cout << "Qeue: ";
-		for (int i = front; i < count; i++) {
+		for (int i = front; i < front + count; i++) {
 			cout << arr[i % capacity] << ' ';
 		}
 	}
