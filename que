@@ -1,66 +1,69 @@
-#include<iostream>
+
+#include<stdio.h>
+#include<stdlib.h>
 #define MAX_SIZE 5
 
-using namespace std;
+struct Que {
+	int* arr;
+	int front;
+	int rear;
+	int count;
+	int capacity;
+};
 
-int main() {
-	int arr[MAX_SIZE];
+void queInit(Que* que, int size) {
+	que->arr = (int*)malloc(sizeof(int) * size);
+	que->front = 0;
+	que->rear = 0;
+	que->count = 0;
+	que->capacity = size;
+}
+
+void enQue(Que* que) {
 	int data;
-	char mode;
-	int front = 0;
-	int rear = 0; 
-	int count = 0;
-	int capacity = MAX_SIZE;
+	if (que->count == que->capacity) {
+		printf("overflow\n");
+	}
+	else if (que->rear == que->capacity) {
+		que->rear = 0;
+	}
+	else {
+		printf("정수 입력:");
+		scanf_s("%d", &data);
+		que->arr[que->rear] = data;
+		printf("\n");
+		printf("%d que\n", data);
+		que->rear++;
+		que->count++;
+	}
+}
 
-
-
-	while (1) {
-		cout << "\nenque(e) or deque(d): ";
-		cin >> mode;
-
-		if (mode == 'e') { // 큐 삽입
-
-			if (count == capacity) { // 큐 overflow
-				cout << "Que overflow" << endl;
-				
-			}
-
-			else { // 큐가 비어있는 경우 정수 입력
-				cout << "\n정수입력: ";
-				cin >> data;
-				arr[rear] = data;
-				rear++;
-				count++; // 채워나가다가
-				if (rear == capacity) { // 끝에 만나면 순환
-					rear = 0;
-				}
-			}
-	
-		}
-
-		else if (mode == 'd') { // 큐 제거
-
-			if (count == 0) { // 큐 underflow
-				cout << "Que underflow" << endl;
-			}
-			else {
-				arr[front++];
-				count--;  // 지워나가다가
-				if (front == capacity) { // 끝에 만나면 순환
-					front = 0;
-				}
-			}
-		}
-
-		else { // 잘못입력
-			cout << "다시 입력하세요." << endl;
-		}
-
-		cout << "Qeue: ";
-		for (int i = front; i < front + count; i++) {
-			cout << arr[i % capacity] << ' ';
-		}
+void deQue(Que* que) {
+	if (que->count == 0) {
+		printf("underflow\n");
+	}
+	else {
+		int data = que->arr[que->front];
+		printf("%d deque\n", data);
+		que->arr[que->front] = NULL;
+		que->front++;
+		que->count--;
+		
 	}
 
+	if (que->front == que->capacity) {
+		que->front = 0;
+	}
+}
+
+int main() {
+	Que que;
+	queInit(&que, 5);
+
+	enQue(&que);
+	enQue(&que);
+	deQue(&que);
+	deQue(&que);
 	
+
 }
